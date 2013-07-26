@@ -3,6 +3,7 @@
  * via access control by convention.
  */
 class ShiroSecurityFilters {
+
     def filters = {
         all(uri: "/**") {
             before = {
@@ -14,4 +15,10 @@ class ShiroSecurityFilters {
             }
         }
     }
+
+    def onUnauthorized(subject, filter) {
+        filter.forward(controller: 'auth', action: 'unauthorized')
+    }
+
 }
+
